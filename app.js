@@ -5,8 +5,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var apiRoutes = require('./routes/api');
-
+var userRoutes = require('./routes/api-user');
+var reviewRoutes = require('./routes/api-review');
 var app = express();
 const connect = require('./dbconfig');
 
@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors('*'))
 
-app.use('/api', apiRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/review', reviewRoutes);
 
 module.exports = app;

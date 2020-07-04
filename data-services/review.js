@@ -1,7 +1,7 @@
-const Review = require('../models/user');
+const Review = require('../models/review');
 
-exports.addReview = async function () {
-  let review = new Review(...payload);
+exports.addReview = async function (payload) {
+  let review = new Review(payload);
   return review.save();
 }
 
