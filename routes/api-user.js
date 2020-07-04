@@ -30,9 +30,9 @@ router.post('/getUser', async function (req, res, next) {
 });
 
 router.post('/updateUser', async function (req, res, next) {
-  const payload = { email: newEmail, name: req.body.name, phoneNumber: req.body.phoneNumber };
+  const payload = { email: req.body.email, name: req.body.name, phoneNumber: req.body.phoneNumber };
   try {
-    await userDataServices.updateUser({ email: prevEmail }, { payload });
+    await userDataServices.updateUser(payload);
     res.status(200).json({ msg: 'updated' });
   }
   catch (error) {
@@ -45,12 +45,12 @@ router.post('/addEmployee', async function (req, res, next) {
   const payload = { email: req.body.email, name: req.body.name, phoneNumber: req.body.phoneNumber };
   try {
     const response = await userDataServices.findUser(req.body.email)
-    if(!response){
+    if (!response) {
       await userDataServices.addEmployee(payload);
       res.status(200).json({ msg: 'added' });
     }
-    else{
-      res.status(400).json({msg: 'email already exists'});
+    else {
+      res.status(400).json({ msg: 'email already exists' });
     }
   }
   catch (error) {
